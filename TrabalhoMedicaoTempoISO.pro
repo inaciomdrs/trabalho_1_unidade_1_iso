@@ -13,8 +13,19 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    statistics.cpp \
+    sorting.cpp \
+    array_handler.cpp \
+    controller.cpp \
+    controller_functions.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    statistics.h \
+    data_strucutures.h \
+    sorting.h \
+    array_handler.h \
+    controller.h \
+    controller_functions.h
 
 FORMS    += mainwindow.ui
