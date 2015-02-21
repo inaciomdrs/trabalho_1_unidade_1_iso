@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
     Input_Interface I;
     I.algorithm_selected = 3;
     I.iteracoes = 10;
-    I.range = "100:100:1000";
+    I.range = "25000:25000:100000";
 
     process(&I);
 

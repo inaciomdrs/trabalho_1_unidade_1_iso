@@ -1,5 +1,7 @@
 // Header para os algoritmos de ordenação
 
+#include <algorithm>
+
 #ifndef SORTING
 #define SORTING
 

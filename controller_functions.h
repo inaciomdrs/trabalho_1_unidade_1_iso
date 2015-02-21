@@ -6,13 +6,16 @@
 #include <sstream>
 #include <vector>
 #include <iostream>
+#include <iomanip>
 
 #ifndef CONTROLLER_FUNCTIONS_H
 #define CONTROLLER_FUNCTIONS_H
 
 int* getRange(std::string input);
-Time_Register* runForAnAlgorithm(std::string name, Sorting algorithm, Range *range, int iteracoes);
 void printVector(Time_Register* array, int size);
+void runForAnAlgorithm(std::string name, Sorting algorithm, std::vector<int*> arrays, int size,
+                       Time_Register& TR, double& tempo_total_processamento);
+void init_Time_Register(Time_Register* & TR_1, Time_Register* & TR_2, int flag, int size);
 
 #endif // CONTROLLER_FUNCTIONS_H
 

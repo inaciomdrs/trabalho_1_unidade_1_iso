@@ -13,31 +13,13 @@ void bubblesort(int *v, int N){
     }
 }
 
-int partition(int v[], int ini, int fim){
-    int pivo = ini;
-    for(int i = ini+1; i < fim; i++){
-        if(v[i] < v[ini]){
-            pivo++;
-            // Troca o elemento que está em v[i] com v[pivo]
-            int aux = v[pivo];
-            v[pivo] = v[i];
-            v[i] = aux;
-        }
-    }
-    int aux = v[ini];
-    v[ini] = v[pivo];
-    v[pivo] = aux;
-    return pivo;
-}
+int comparar(const void * x, const void * y){
+    int *m = (int*) x;
+    int *n = (int*) y;
 
-void realQuickSort(int *v, int N, int ini, int fim){
-    if(fim > ini){
-        int pivot = partition(v,ini,fim);
-        realQuickSort(v,N,ini,pivot);
-        realQuickSort(v,N,pivot+1,N);
-    }
+    return ( (*m) - *(n) );
 }
 
 void quicksort(int *v, int N){
-    realQuickSort(v,N,0,N-1);
+    qsort(v,N,sizeof(int),comparar);
 }

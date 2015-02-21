@@ -23,51 +23,52 @@ int* getRange(std::string input){
     return saida;
 }
 
-Time_Register* runForAnAlgorithm(std::string name, Sorting algorithm, Range *range, int iteracoes){
-    int result_vector_size = range->end / range->start;
-
-    Time_Register* time_registers = new Time_Register[result_vector_size]; // Guarda os registros de tempo
-                                               // para cada tamanho de entrada
-
-    int tempo_processamento_total = 0; // Guarda o somatório de todos os tempos para todas as entradas
-
-    int *array;
-
-    int it = 0;
-    for (int size = range->start; size <= range->end; size += range->pass) {
-        time_registers[it].algorithm = name;
-        time_registers[it].array_length = size;
-        time_registers[it].tempo_execucao = 0;
-
-        double elapsed_times[iteracoes];
-
-        for (int iteracao = 1; iteracao <= iteracoes; ++iteracao) {
-            array = generateArrayOfSize(size);
-            elapsed_times[iteracao] = timeElapsedByAlgorithm(algorithm,array,size);
-            time_registers[it].tempo_execucao += elapsed_times[iteracao];
-            tempo_processamento_total += elapsed_times[iteracao];
-        }
-
-        time_registers[it].mean = mean(elapsed_times,size);
-        time_registers[it].deviation = std_dev(elapsed_times,size);
-
-        it++;
-
+void printVector(Time_Register * array, int size){
+    std::setw(15);
+    std::cout << "ALGORITHM\tLENGTH\tMEAN\tDEVIATION\tTIME\tPERCENTAGE\n";
+    for (int element = 0; element < size; ++element) {
+        std::cout << array[element].algorithm << "\t" << array[element].array_length << "\t"
+                  << std::setprecision(3) << array[element].mean << "\t" << array[element].deviation << "\t"
+                  << array[element].tempo_execucao << "\t" << array[element].percentage << "%\n";
     }
-
-    double percentage;
-    for (int time_register = 0; time_register < result_vector_size; ++time_register) {
-        percentage = time_registers[time_register].tempo_execucao / tempo_processamento_total;
-        time_registers[time_register].percentage = (int) (percentage * 100);
-    }
-    return time_registers;
 }
 
-void printVector(Time_Register * array, int size){
-    std::cout << "ALGORITHM | LENGTH | MEAN | DEVIATION | TIME | PERCENTAGE\n";
-    for (int element = 0; element < size; ++element) {
-        std::cout << array[element].algorithm << " | " << array[element].array_length << " | "
-                  << array[element].mean << " | " << array[element].deviation << " | "
-                  << array[element].tempo_execucao << " | " << array[element].percentage << "\n";
+// Pega a média e o desvio padrão dos tempos gastos por um algoritmo para ordenar um conjunto de vetores
+void runForAnAlgorithm(std::string name, Sorting algorithm, std::vector<int*> arrays, int size,
+                       Time_Register& TR, double& tempo_total_processamento){
+
+    TR.algorithm = name;
+    TR.array_length = size;
+    TR.tempo_execucao = 0;
+
+    int *array_it; // Iterador sobre a lista de vetores
+    double times[arrays.size()]; // Guarda o tempo que cada vetor levou para ser ordenado
+
+    for (int var = 0; var < arrays.size(); ++var) {
+        array_it = arrays[var];
+        times[var] += timeElapsedByAlgorithm(algorithm,array_it,size);
+        TR.tempo_execucao += times[var];
+        tempo_total_processamento += times[var];
+    }
+
+    TR.mean = mean(times,arrays.size());
+    TR.deviation = std_dev(times,arrays.size());
+}
+
+void init_Time_Register(Time_Register* & TR_1, Time_Register* & TR_2, int flag, int size){
+    switch(flag){
+        case 1:
+            TR_1 = new Time_Register[size];
+            TR_2 = NULL;
+            break;
+        case 2:
+            TR_1 = NULL;
+            TR_2 = new Time_Register[size];
+            break;
+        case 3:
+            TR_1 = new Time_Register[size];
+            TR_2 = new Time_Register[size];
+            break;
+        default: break;
     }
 }

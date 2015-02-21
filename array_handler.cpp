@@ -15,6 +15,13 @@ int* generateArrayOfSize(int n){
     return array;
 }
 
+void generateArraysOfSize(int n, int quantity, std::vector<int*>& arrays){
+    for (int iArray = 0; iArray < quantity; ++iArray) {
+        int *array = generateArrayOfSize(n);
+        arrays.push_back(array);
+    }
+}
+
 // Mede o tempo gasto por um algoritmo para ordenar um vetor de 'length' elementos
 double timeElapsedByAlgorithm(Sorting sorter, int *array, int length){
     clock_t inicio, fim;
@@ -22,6 +29,6 @@ double timeElapsedByAlgorithm(Sorting sorter, int *array, int length){
     sorter(array,length);
     fim = clock();
 
-    return (double) ((inicio-fim) / ((double) CLOCKS_PER_SEC));
+    return (double) ((fim-inicio) / ((double) CLOCKS_PER_SEC));
 
 }
