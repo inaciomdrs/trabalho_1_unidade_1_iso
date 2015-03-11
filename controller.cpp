@@ -1,6 +1,6 @@
 #include "controller.h"
 
-void process(Input_Interface *input){
+Output_Interface* process(Input_Interface *input){
     // Captura os valores do range para o "forzao"
     int *valoresRange = getRange(input->range);
     Range *range = new Range;
@@ -32,7 +32,7 @@ void process(Input_Interface *input){
         }
     }
 
-    std::cout << "Tempo Total: " << total_time << "\n";
+//    std::cout << "Tempo Total: " << total_time << "\n";
 
     if(for_quicksort){
 
@@ -57,24 +57,13 @@ void process(Input_Interface *input){
     Output_Interface saida_quicksort = translate(for_quicksort,time_register_list_size);
     Output_Interface saida_bubblesort = translate(for_bubblesort,time_register_list_size);
 
-    std::cout << "\nIMPRIMINDO SAÍDA BRUTA PARA QUICKSORT\n";
-    for (int i = 0; i < time_register_list_size; ++i) {
-        std::cout << saida_quicksort.tamanhos_vetores[i] << " "
-             << saida_quicksort.tempo[i] << " "
-             << saida_quicksort.porcentagem[i] << " "
-             << saida_quicksort.desvio_padrao_inferior[i] << " "
-             << saida_quicksort.desvio_padrao_superior[i] << "\n";
-    }
+    saida_quicksort.length = time_register_list_size;
+    saida_bubblesort.length = time_register_list_size;
 
-    std::cout << "\nIMPRIMINDO SAÍDA BRUTA PARA QUICKSORT\n";
-    for (int i = 0; i < time_register_list_size; ++i) {
-        std::cout << saida_quicksort.tamanhos_vetores[i] << " "
-             << saida_bubblesort.tempo[i] << " "
-             << saida_bubblesort.porcentagem[i] << " "
-             << saida_bubblesort.desvio_padrao_inferior[i] << " "
-             << saida_bubblesort.desvio_padrao_superior[i] << "\n";
-    }
+    Output_Interface output[2];
+    output[0] = saida_quicksort;
+    output[1] = saida_bubblesort;
 
-    std::cout << "FIM\n";
+    return output;
 
 }

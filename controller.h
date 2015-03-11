@@ -6,7 +6,7 @@
 #ifndef CONTROLLER
 #define CONTROLLER
 
-void process(Input_Interface *input);
+Output_Interface* process(Input_Interface *input);
 
 #endif // CONTROLLER
 
