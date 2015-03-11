@@ -17,7 +17,12 @@ typedef struct {
 // Interface de saída. Organiza os dados para envio para a interface gráfica, para a produção
 // do gráfico
 typedef struct {
-    // TODO Construir a interface de saída
+    int length; // TAMANHO DOS VETORES
+    int *tamanhos_vetores;
+    double *tempo;
+    double *porcentagem;
+    double *desvio_padrao_superior;
+    double *desvio_padrao_inferior;
 } Output_Interface;
 
 typedef struct {
@@ -30,7 +35,7 @@ typedef struct {
     std::string algorithm; // nome do algoritmo
     int array_length; // tamanho do vetor utilizado
     double mean; // média dos tempos gastos
-    double deviation; // desvio-padrão dos tempos gastos
+    double *deviation; // desvio-padrão dos tempos gastos
     double tempo_execucao;
     int percentage; // porcentagem do tempo gasto para processar vetores do tamanho especificado em
                     // relação a soma total de todos os tempos gastos.

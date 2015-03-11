@@ -18,7 +18,8 @@ SOURCES += main.cpp\
     sorting.cpp \
     array_handler.cpp \
     controller.cpp \
-    controller_functions.cpp
+    controller_functions.cpp \
+    translator.cpp
 
 HEADERS  += mainwindow.h \
     statistics.h \
@@ -26,6 +27,7 @@ HEADERS  += mainwindow.h \
     sorting.h \
     array_handler.h \
     controller.h \
-    controller_functions.h
+    controller_functions.h \
+    translator.h
 
 FORMS    += mainwindow.ui

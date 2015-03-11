@@ -2,6 +2,7 @@
 #include "data_strucutures.h"
 #include "statistics.h"
 #include "sorting.h"
+#include "translator.h"
 #include <string>
 #include <sstream>
 #include <vector>

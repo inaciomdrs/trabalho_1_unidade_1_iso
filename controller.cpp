@@ -40,7 +40,7 @@ void process(Input_Interface *input){
             for_quicksort[i].percentage = (for_quicksort[i].tempo_execucao / total_time) * 100;
         }
 
-        printVector(for_quicksort,time_register_list_size);
+//        printVector(for_quicksort,time_register_list_size);
     }
 
     if(for_bubblesort){
@@ -49,7 +49,30 @@ void process(Input_Interface *input){
             for_bubblesort[i].percentage = (for_bubblesort[i].tempo_execucao / total_time) * 100;
         }
 
-        printVector(for_bubblesort,time_register_list_size);
+//        printVector(for_bubblesort,time_register_list_size);
+    }
+
+    std::cout << "====================================================================";
+
+    Output_Interface saida_quicksort = translate(for_quicksort,time_register_list_size);
+    Output_Interface saida_bubblesort = translate(for_bubblesort,time_register_list_size);
+
+    std::cout << "\nIMPRIMINDO SAÍDA BRUTA PARA QUICKSORT\n";
+    for (int i = 0; i < time_register_list_size; ++i) {
+        std::cout << saida_quicksort.tamanhos_vetores[i] << " "
+             << saida_quicksort.tempo[i] << " "
+             << saida_quicksort.porcentagem[i] << " "
+             << saida_quicksort.desvio_padrao_inferior[i] << " "
+             << saida_quicksort.desvio_padrao_superior[i] << "\n";
+    }
+
+    std::cout << "\nIMPRIMINDO SAÍDA BRUTA PARA QUICKSORT\n";
+    for (int i = 0; i < time_register_list_size; ++i) {
+        std::cout << saida_quicksort.tamanhos_vetores[i] << " "
+             << saida_bubblesort.tempo[i] << " "
+             << saida_bubblesort.porcentagem[i] << " "
+             << saida_bubblesort.desvio_padrao_inferior[i] << " "
+             << saida_bubblesort.desvio_padrao_superior[i] << "\n";
     }
 
     std::cout << "FIM\n";

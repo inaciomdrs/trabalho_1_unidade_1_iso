@@ -24,12 +24,12 @@ int* getRange(std::string input){
 }
 
 void printVector(Time_Register * array, int size){
-    std::setw(15);
-    std::cout << "ALGORITHM\tLENGTH\tMEAN\tDEVIATION\tTIME\tPERCENTAGE\n";
+    std::setw(30);
+    std::cout << "ALGORITHM\tLENGTH\tMEAN\tDEVIATION_INF\tDEVIATION_SUP\tTIME\tPERCENTAGE\n";
     for (int element = 0; element < size; ++element) {
         std::cout << array[element].algorithm << "\t" << array[element].array_length << "\t"
-                  << std::setprecision(3) << array[element].mean << "\t" << array[element].deviation << "\t"
-                  << array[element].tempo_execucao << "\t" << array[element].percentage << "%\n";
+                  << std::setprecision(3) << array[element].mean << "\t" << array[element].deviation[0] << "\t"
+                  << array[element].deviation[1] << "\t" << array[element].tempo_execucao << "\t" << array[element].percentage << "%\n";
     }
 }
 
