@@ -23,37 +23,84 @@ int main(int argc, char *argv[])
     I.iteracoes = 10;
 
     // Mesma coisa pra cá
-    I.range = "10:10:50";
+    I.range = "25000:25000:100000";
 
     // esse método process pega uma Input_Interface, faz o muido todo de medição, ordenação
     // etc. etc. e devolve os resultados todos prontins, só os vetores de int e double show
     // de bola, todos guardados num ponteiro de 'Output_Interface'
 
-    // Na verdade, na verdade, a saída...
+    // Na verdade, na verdade, a saída vai ser um vetor com dois 'Output_Interface': um pro
+    // quick e outro pro bubble. Pra saber se um 'Output_Interface' está "vazio" (ou seja,
+    // não foi rodado um algoritmo específico), é só ver o atributo length.
     Output_Interface* saidas = process(&I);
 
     Output_Interface saida_quicksort = saidas[0];
     Output_Interface saida_bubblesort = saidas[1];
 
+
+    // Vetores inteiros e double de saída
+    // ------------------------------------------
+    // QUICKSORT
+    //===========================================
+    int *QeixoXtamanhos; // Tamanhos dos vetores
+    double *QeixoYtempos; // Tempo total para ordenar todos os vetores de um determinado tamanho
+    double *QeixoYporcentagem; // Porcentagem de cada tempo total acima sobre a soma de todos os tempos
+    double *QeixoYdesvioPadraoInferior; // desvio padrão inferior
+    double *QeixoYdesvioPadraoSuperior; // desvio padrão superior
+    //===========================================
+    // BUBBLESORT
+    //===========================================
+    int *BeixoXtamanhos; // Tamanhos dos vetores
+    double *BeixoYtempos; // Tempo total para ordenar todos os vetores de um determinado tamanho
+    double *BeixoYporcentagem; // Porcentagem de cada tempo total acima sobre a soma de todos os tempos
+    double *BeixoYdesvioPadraoInferior; // desvio padrão inferior
+    double *BeixoYdesvioPadraoSuperior; // desvio padrão superior
+    //===========================================
+
+
+
+    // Se o quicksort foi selecionado anteriormente, então o atributo "length" de saida_quicksort
+    // é maior que zero.
     if(saida_quicksort.length != 0) {
+        // EXTRAINDO OS VETORES (Todos os vetores vão ter o mesmo tamanho, que vai ser saida_quicksort.length)
+        // ==================================================
+        QeixoXtamanhos = saida_quicksort.tamanhos_vetores;
+        QeixoYtempos = saida_quicksort.tempo;
+        QeixoYporcentagem = saida_quicksort.porcentagem;
+        QeixoYdesvioPadraoInferior = saida_quicksort.desvio_padrao_inferior;
+        QeixoYdesvioPadraoSuperior = saida_quicksort.desvio_padrao_superior;
+        // ==================================================
+
         std::cout << "\nIMPRIMINDO SAÍDA BRUTA PARA QUICKSORT\n";
         for (int i = 0; i < saida_quicksort.length; ++i) {
-            std::cout << saida_quicksort.tamanhos_vetores[i] << " "
-                      << saida_quicksort.tempo[i] << " "
-                      << saida_quicksort.porcentagem[i] << " "
-                      << saida_quicksort.desvio_padrao_inferior[i] << " "
-                      << saida_quicksort.desvio_padrao_superior[i] << "\n";
+            std::cout << QeixoXtamanhos[i] << " "
+                      << QeixoYtempos[i] << " "
+                      << QeixoYporcentagem[i] << " "
+                      << QeixoYdesvioPadraoInferior[i] << " "
+                      << QeixoYdesvioPadraoSuperior[i] << "\n";
         }
     }
 
+
+    // Se o bubblesort foi selecionado anteriormente, então o atributo "length" de saida_quicksort
+    // é maior que zero.
     if(saida_bubblesort.length != 0){
+        // EXTRAINDO OS VETORES (Todos os vetores vão ter o mesmo tamanho, que vai ser saida_quicksort.length)
+        // ==================================================
+        BeixoXtamanhos = saida_bubblesort.tamanhos_vetores;
+        BeixoYtempos = saida_bubblesort.tempo;
+        BeixoYporcentagem = saida_bubblesort.porcentagem;
+        BeixoYdesvioPadraoInferior = saida_bubblesort.desvio_padrao_inferior;
+        BeixoYdesvioPadraoSuperior = saida_bubblesort.desvio_padrao_superior;
+        // ==================================================
+
         std::cout << "\nIMPRIMINDO SAÍDA BRUTA PARA BUBBLESORT\n";
         for (int i = 0; i < saida_bubblesort.length; ++i) {
-            std::cout << saida_bubblesort.tamanhos_vetores[i] << " "
-                      << saida_bubblesort.tempo[i] << " "
-                      << saida_bubblesort.porcentagem[i] << " "
-                      << saida_bubblesort.desvio_padrao_inferior[i] << " "
-                      << saida_bubblesort.desvio_padrao_superior[i] << "\n";
+            std::cout << BeixoXtamanhos[i] << " "
+                      << BeixoYtempos[i] << " "
+                      << BeixoYporcentagem[i] << " "
+                      << BeixoYdesvioPadraoInferior[i] << " "
+                      << BeixoYdesvioPadraoSuperior[i] << "\n";
         }
     }
 
