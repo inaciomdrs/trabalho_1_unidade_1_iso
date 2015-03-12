@@ -15,6 +15,7 @@ Output_Interface translate(Time_Register *input, int length){
         resultado.porcentagem[i] = input[i].percentage;
         resultado.desvio_padrao_inferior[i] = input[i].deviation[0];
         resultado.desvio_padrao_superior[i] = input[i].deviation[1];
+
     }
 
     return resultado;
